@@ -1,6 +1,6 @@
 # Trabalho B1 - Lógica de Programação e Algoritmos
 
-**Nome:** Miguel Vilar Martins Ferreira | **R.A.:** UC26102017 | **Curso:** Engenharia de Software **Turma:** GPE17M20088
+**Nome:** Miguel Vilar Martins Ferreira | **R.A.:** UC26102017 | **Curso:** Engenharia de Software | **Turma:** GPE17M20088
 
 ## Descrição
 Esse programa é um simulador de frete bem direto que fiz em linguagem C. Ele serve para calcular o preço final de uma entrega cruzando a distância, o peso do pacote e a modalidade de envio que o usuário escolher. O foco principal foi resolver um problema prático de logística seguindo a regra da matéria: fazer tudo rodar em tempo real sem salvar nada em vetores ou structs.
