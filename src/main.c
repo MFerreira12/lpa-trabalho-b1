@@ -45,9 +45,9 @@ int main() {
     int opcaoInformada;
     int modalidade;
     int protecao;
-	int totalEntregas = 0;
-	
-	float distancia;
+    int totalEntregas = 0;
+    
+    float distancia;
     float valorBase;
     float subtotalInicial;
     float peso;
@@ -138,5 +138,4 @@ int main() {
     
     return 0;
 }
-
 
