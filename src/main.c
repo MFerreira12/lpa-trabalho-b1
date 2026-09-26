@@ -43,15 +43,22 @@ int main() {
     
     int continuar = 1;
     int opcaoInformada;
-    float distancia;
+    int modalidade;
+    int protecao;
+	int totalEntregas = 0;
+	
+	float distancia;
     float valorBase;
     float subtotalInicial;
     float peso;
     float percentualPeso;
     float subtotalComPeso;
-    int modalidade;
     float percentualModalidade;
     float subtotalComModalidade;
+    float valorFinalEntrega;
+    float faturamentoTotal = 0.0;
+    float maiorValor = 0.0;
+    float menorValor = 0.0;
     
     printf("--- Simulador de Entregas Inicializado ---\n");
     
@@ -80,6 +87,10 @@ int main() {
         scanf("%d", &modalidade);
         modalidade = validarModalidade(modalidade);
         
+        printf("Deseja incluir proteção contra danos? (1 - Sim, 0 - Não): ");
+        scanf("%d", &protecao);
+        protecao = validarOpcao0ou1(protecao);
+        
         valorBase = calcularValorBase(distancia);
         subtotalInicial = valorBase + (distancia * 1.20);
         
@@ -89,7 +100,28 @@ int main() {
         percentualModalidade = calcularAdicionalModalidade(modalidade);
         subtotalComModalidade = subtotalComPeso + (subtotalComPeso * percentualModalidade);
         
-        printf("Subtotal parcial (Distância + Peso + Modalidade): R$ %.2f\n", subtotalComModalidade);
+        if (protecao == 1) {
+            valorFinalEntrega = subtotalComModalidade + 15.00;
+        } else {
+            valorFinalEntrega = subtotalComModalidade;
+        }
+        
+        printf("Valor final desta entrega: R$ %.2f\n", valorFinalEntrega);
+        
+        totalEntregas++;
+        faturamentoTotal += valorFinalEntrega;
+        
+        if (totalEntregas == 1) {
+            maiorValor = valorFinalEntrega;
+            menorValor = valorFinalEntrega;
+        } else {
+            if (valorFinalEntrega > maiorValor) {
+                maiorValor = valorFinalEntrega;
+            }
+            if (valorFinalEntrega < menorValor) {
+                menorValor = valorFinalEntrega;
+            }
+        }
         
         printf("\nDeseja processar outra entrega? (1 - Sim, 0 - Não): ");
         scanf("%d", &opcaoInformada);
@@ -97,8 +129,14 @@ int main() {
         
     } while (continuar == 1);
     
-    printf("\n--- Sessão Encerrada. Exibindo resumo final... ---\n");
+    printf("\n==========RESUMO DA SESSÃO=============\n");
+    printf("Total de entregas processadas: %d\n", totalEntregas);
+    printf("Faturamento total do período: R$ %.2f\n", faturamentoTotal);
+    printf("Maior valor de entrega registrado: R$ %.2f\n", maiorValor);
+    printf("Menor valor de entrega registrado: R$ %.2f\n", menorValor);
+    printf("=========================================\n");
     
     return 0;
 }
+
 
