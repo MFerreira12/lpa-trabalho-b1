@@ -10,6 +10,14 @@ int validarOpcao0ou1(int valor) {
     return valor;
 }
 
+int validarModalidade(int mod) {
+    while (mod < 1 || mod > 3) {
+        printf("Modalidade inválida! Escolha de 1 a 3: ");
+        scanf("%d", &mod);
+    }
+    return mod;
+}
+
 float calcularValorBase(float dist) {
     if (dist <= 5.0) return 8.00;
     if (dist <= 15.0) return 12.00;
@@ -24,6 +32,12 @@ float calcularAdicionalPeso(float peso) {
     return 0.15;
 }
 
+float calcularAdicionalModalidade(int mod) {
+    if (mod == 1) return 0.00;
+    if (mod == 2) return 0.20;
+    return 0.40;
+}
+
 int main() {
     setlocale(LC_ALL, "Portuguese");
     
@@ -35,6 +49,9 @@ int main() {
     float peso;
     float percentualPeso;
     float subtotalComPeso;
+    int modalidade;
+    float percentualModalidade;
+    float subtotalComModalidade;
     
     printf("--- Simulador de Entregas Inicializado ---\n");
     
@@ -48,12 +65,20 @@ int main() {
             scanf("%f", &distancia);
         }
         
-        printf("Digite a peso da entrega em kg: ");
+        printf("Digite o peso da entrega em kg: ");
         scanf("%f", &peso);
         while (peso <= 0) {
             printf("Peso inválido! Deve ser maior que 0. Digite novamente: ");
             scanf("%f", &peso);
         }
+        
+        printf("Escolha a modalidade de entrega:\n");
+        printf(" 1 - Econômica (Sem adicional)\n");
+        printf(" 2 - Expressa (+20%%)\n");
+        printf(" 3 - Prioritária (+40%%)\n");
+        printf("Digite a opção (1-3): ");
+        scanf("%d", &modalidade);
+        modalidade = validarModalidade(modalidade);
         
         valorBase = calcularValorBase(distancia);
         subtotalInicial = valorBase + (distancia * 1.20);
@@ -61,7 +86,10 @@ int main() {
         percentualPeso = calcularAdicionalPeso(peso);
         subtotalComPeso = subtotalInicial + (subtotalInicial * percentualPeso);
         
-        printf("Subtotal parcial (Distância + Valor-Base + Taxa de Peso): R$ %.2f\n", subtotalComPeso);
+        percentualModalidade = calcularAdicionalModalidade(modalidade);
+        subtotalComModalidade = subtotalComPeso + (subtotalComPeso * percentualModalidade);
+        
+        printf("Subtotal parcial (Distância + Peso + Modalidade): R$ %.2f\n", subtotalComModalidade);
         
         printf("\nDeseja processar outra entrega? (1 - Sim, 0 - Não): ");
         scanf("%d", &opcaoInformada);
@@ -73,5 +101,4 @@ int main() {
     
     return 0;
 }
-
 
