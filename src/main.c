@@ -79,15 +79,15 @@ int main() {
             scanf("%f", &peso);
         }
         
-        printf("Escolha a modalidade de entrega:\n");
-        printf(" 1 - Econômica (Sem adicional)\n");
+        printf("\nEscolha a modalidade de entrega:\n");
+        printf("\n 1 - Econômica (Sem adicional)\n");
         printf(" 2 - Expressa (+20%%)\n");
         printf(" 3 - Prioritária (+40%%)\n");
-        printf("Digite a opção (1-3): ");
+        printf("\nDigite a opção (1-3): ");
         scanf("%d", &modalidade);
         modalidade = validarModalidade(modalidade);
         
-        printf("Deseja incluir proteção contra danos? (1 - Sim, 0 - Não): ");
+        printf("\nDeseja incluir proteção contra danos? (1 - Sim, 0 - Não): ");
         scanf("%d", &protecao);
         protecao = validarOpcao0ou1(protecao);
         
@@ -106,7 +106,7 @@ int main() {
             valorFinalEntrega = subtotalComModalidade;
         }
         
-        printf("Valor final desta entrega: R$ %.2f\n", valorFinalEntrega);
+        printf("\nValor final desta entrega: R$ %.2f\n", valorFinalEntrega);
         
         totalEntregas++;
         faturamentoTotal += valorFinalEntrega;
